@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>二十届四中全会精神·学习测试</title>
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  padding: 16px;
+  background: #f7f8fa;
+  color: #333;
+}
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.question {
+  background: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+.options button {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+  background: #f0f0f5;
+  border: none;
+  border-radius: 10px;
+  font-size: .9rem;
+  text-align: left;
+}
+.options button.correct { background: #c8f7c8; }
+.options button.wrong { background: #f7c8c8; }
+.explanation {
+  margin-top: 8px;
+  font-size: .85rem;
+  color: #555;
+  display: none;
+}
+#score-area {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  display: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+</style>
+</head>
+<body>
+
+<h2>二十届四中全会精神 · 学习小测试（10题）</h2>
+
+<div id="quiz-area"></div>
+<div id="score-area"></div>
+
+<script>
+const questions = [
+  {
+    q: "1. 本次全会通过的主要文件之一是：",
+    options: ["A. 《国家安全法》", "B. 《中共中央关于制定国民经济和社会发展第十五个五年规划的建议》", "C. 《关于深化改革总体方案》", "D. 《政府工作报告》"],
+    answer: 1,
+    explanation: "本次全会审议并通过了《中共中央关于制定国民经济和社会发展第十五个五年规划的建议》。"
+  },
+  {
+    q: "2. 全会强调“十五五”时期要坚持的原则不包括：",
+    options: ["A. 坚持党的全面领导", "B. 坚持人民至上", "C. 坚持唯GDP论", "D. 坚持统筹发展和安全"],
+    answer: 2,
+    explanation: "全会提出的六项原则中并不包含“唯GDP论”。"
+  },
+  {
+    q: "3. 全会指出，“十五五”时期是哪个阶段的关键时期？",
+    options: ["A. 全面建设小康社会", "B. 实现社会主义现代化基础夯实阶段", "C. 初步实现农业现代化", "D. 基本完善社会主义市场经济"],
+    answer: 1,
+    explanation: "“十五五”时期被定位为基本实现社会主义现代化的基础夯实和全面发力的关键时期。"
+  },
+  {
+    q: "4. 全会强调发展的主题是：",
+    options: ["A. 推动共同富裕", "B. 推动高质量发展", "C. 推动高速度发展", "D. 推动农业现代化"],
+    answer: 1,
+    explanation: "全会明确指出，“高质量发展”是“十五五”时期的主题。"
+  },
+  {
+    q: "5. 全会提出建设现代化产业体系，强调发展的着力点应放在：",
+    options: ["A. 房地产经济", "B. 实体经济", "C. 金融投机", "D. 国际贸易"],
+    answer: 1,
+    explanation: "全会强调要坚持把发展的着力点放在实体经济上。"
+  },
+  {
+    q: "6. 为引领新质生产力发展，全会提出要：",
+    options: ["A. 大量建设传统工厂", "B. 加强原始创新和关键核心技术攻关", "C. 完全依赖国外技术", "D. 减少科研投入"],
+    answer: 1,
+    explanation: "全会强调要加强原始创新和关键核心技术攻关，实现科技自立自强。"
+  },
+  {
+    q: "7. 全会在民生方面提出要坚持：",
+    options: ["A. 一切从市场出发", "B. 尽力而为、量力而行", "C. 只发展不惠民", "D. 城市优先"],
+    answer: 1,
+    explanation: "全会提出加大保障和改善民生力度，坚持尽力而为、量力而行。"
+  },
+  {
+    q: "8. 关于绿色转型，全会强调要牢固树立的理念是：",
+    options: ["A. 金山银山就是绿水青山", "B. 绿水青山就是金山银山", "C. 发展优先，环保其次", "D. 放弃碳中和"],
+    answer: 1,
+    explanation: "全会强调“绿水青山就是金山银山”。"
+  },
+  {
+    q: "9. 全会强调要如期实现哪个战略目标？",
+    options: ["A. 建军一百年奋斗目标", "B. 千年发展目标", "C. 社会主义初级阶段目标", "D. 双碳提前十年实现"],
+    answer: 0,
+    explanation: "全会强调如期实现建军一百年奋斗目标。"
+  },
+  {
+    q: "10. 全会号召全党全军全国各族人民要：",
+    options: ["A. 各自发展，互不干涉", "B. 更加紧密团结，推进中国式现代化", "C. 向市场完全放权", "D. 暂停改革开放"],
+    answer: 1,
+    explanation: "全会号召要更加紧密团结，为推进中国式现代化共同奋斗。"
+  }
+];
+
+// 渲染题目
+const quizArea = document.getElementById("quiz-area");
+let score = 0;
+let answeredCount = 0;
+
+questions.forEach((item, idx) => {
+  const qDiv = document.createElement("div");
+  qDiv.className = "question";
+  
+  qDiv.innerHTML = `
+    <div class="qtext">${item.q}</div>
+    <div class="options"></div>
+    <div class="explanation">👉 解析：${item.explanation}</div>
+  `;
+
+  const optionsDiv = qDiv.querySelector(".options");
+
+  item.options.forEach((opt, optIndex) => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+
+    btn.onclick = function() {
+      // 防止重复答题
+      if (btn.parentElement.classList.contains("answered")) return;
+
+      optionsDiv.classList.add("answered");
+
+      if (optIndex === item.answer) {
+        btn.classList.add("correct");
+        score += 10;
+      } else {
+        btn.classList.add("wrong");
+        optionsDiv.children[item.answer].classList.add("correct");
+      }
+
+      qDiv.querySelector(".explanation").style.display = "block";
+      answeredCount++;
+
+      if (answeredCount === questions.length) {
+        document.getElementById("score-area").style.display = "block";
+        document.getElementById("score-area").innerHTML =
+          `🎉 您的总分为：<strong>${score} 分</strong> / 100 分`;
+      }
+    };
+
+    optionsDiv.appendChild(btn);
+  });
+
+  quizArea.appendChild(qDiv);
+});
+</script>
+
+</body>
+</html>
